@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GANT - by MARFA NoHotels®</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --accent-color: #111111;
+            --gray-light: #f5f5f5;
+            --gray-dark: #333333;
+            --font-mono: 'Courier New', Courier, monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .mono {
+            font-family: var(--font-mono);
+            letter-spacing: -0.5px;
+            font-size: 0.85rem;
+            color: var(--gray-dark);
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 4rem;
+        }
+
+        .system-status {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            text-transform: uppercase;
+        }
+
+        .system-status span::before {
+            content: "● ";
+            color: #00ff00;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        h2.subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 400;
+            color: var(--gray-dark);
+            max-width: 800px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-image-wrapper {
+            margin-top: 2rem;
+            background-color: var(--gray-light);
+            aspect-ratio: 16/9;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Manifesto Pillars */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .pillar h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-family: var(--font-mono);
+        }
+
+        .pillar p {
+            color: var(--gray-dark);
+        }
+
+        /* Central Kernel Split */
+        .split {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .split { grid-template-columns: 1fr; }
+        }
+
+        .split-image {
+            background-color: var(--gray-light);
+            aspect-ratio: 4/3;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        .split-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        /* Financial Insights Table */
+        .table-wrapper {
+            margin-top: 3rem;
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-sans);
+            text-align: left;
+        }
+
+        th, td {
+            padding: 1.2rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            color: var(--gray-dark);
+            background-color: var(--gray-light);
+        }
+
+        td strong {
+            font-family: var(--font-mono);
+        }
+
+        .financial-note {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: var(--gray-light);
+            border-left: 3px solid var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        /* Interactive Restricted Gate Form */
+        .gate-box {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 4rem;
+            margin-top: 4rem;
+            border-radius: 0;
+            font-family: var(--font-sans);
+        }
+
+        .gate-box h3 {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #00ff00;
+            text-transform: uppercase;
+        }
+
+        .gate-box p {
+            color: #cccccc;
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            color: #aaaaaa;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #444444;
+            color: #ffffff;
+            padding: 0.8rem 0;
+            font-size: 1.1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #00ff00;
+        }
+
+        .form-group select option {
+            background-color: #111111;
+            color: #ffffff;
+        }
+
+        .btn-tactic {
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn-tactic:hover {
+            background-color: #00ff00;
+            color: #000000;
+        }
+
+        footer {
+            padding: 4rem 0;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: #888888;
+            background-color: var(--gray-light);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <div class="system-status mono">
+                <span>LATENCY: sub-20ms</span>
+                <span>LOCATION: HUARAZ VERTICAL CLIFF (4,000 MSNM)</span>
+                <span>STATUS: OVERCLOCKED</span>
+            </div>
+            <h1>GANT<br><span style="font-weight: 300; font-size: 0.7em;">by MARFA NoHotels®</span></h1>
+            <h2 class="subtitle">Esto no es hospitalidad. Es aislamiento armado para el rendimiento de élite de la tribu global de nómadas de granito.</h2>
+            
+            <div class="hero-image-wrapper">
+                <!-- El usuario colocará image_gvk11q.png como cabina base -->
+                <img src="public/image_gvk11q.png" alt="GANT Cockpit Táctico de Operaciones">
+            </div>
+        </div>
+    </section>
+
+    <!-- MANIFESTO SECTION -->
+    <section>
+        <div class="container">
+            <p class="mono" style="text-transform: uppercase; margin-bottom: 1rem;">// HARDCORE GOVERNANCE DIRECTIVES</p>
+            <h2 class="section-title">La Directiva de Cero Complicaciones</h2>
+            <div class="grid-3">
+                <div class="pillar">
+                    <h3>01 // BE UNSTARBUCKABLE</h3>
+                    <p>Destrucción total de los clichés diluidos y el bucle infinito de dopamina barata de la Matrix urbana. El entorno está diseñado para reescribir la capacidad de procesamiento de datos del cerebro.</p>
+                </div>
+                <div class="pillar">
+                    <h3>02 // BE BRUTAL</h3>
+                    <p>Eliminación radical de cualquier línea de software o infraestructura redundante de tu ecosistema físico. Líneas rectas monolíticas, adobe compactado crudo y masa térmica pura.</p>
+                </div>
+                <div class="pillar">
+                    <h3>03 // BE ILLEGAL</h3>
+                    <p>Declaración de soberanía absoluta sobre tu propio enfoque mental. Operar un búnker tecnológico clandestino e inercial fuera de la red de control corporativo tradicional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE ANT COLONY PROTOCOL -->
+    <section id="colony">
+        <div class="container split">
+            <div>
+                <p class="mono" style="text-transform: uppercase; margin-bottom: 1rem;">// ORGANIC KERNEL DEPLOYMENT</p>
+                <h2 class="section-title">El Protocolo ANT: La Colonia Silenciosa</h2>
+                <p style="margin-bottom: 1.5rem; color: var(--gray-dark);">
+                    "Una comunidad de alta montaña hiperconectada que opera en silencio bajo y sobre la roca andina."
+                </p>
+                <p style="color: var(--gray-dark); margin-bottom: 1.5rem;">
+                    <strong>Superficie (El Exoesqueleto):</strong> Módulos catenarios y exentos de tierra estabilizada que imitan el orden biológico del exoesqueleto de una hormiga. Células con fosos de conversación y óculos cenitales que encuadran el cielo interestelar y regulan de forma pasiva el microclima extremo.
+                </p>
+                <p style="color: var(--gray-dark);">
+                    <strong>Subterráneo (El Kernel central):</strong> El núcleo analógico de datos, los bancos de baterías de litio y el almacenamiento hídrico blindados de forma natural por la inercia del granito andino, inmunes a la interferencia del mundo exterior.
+                </p>
+            </div>
+            <div class="split-image">
+                <!-- El usuario colocará image_STA9th.png o image_fvqxSc.png para el anillo de la colonia -->
+                <img src="public/image_STA9th.png" alt="GANT Anillo Arquitectónico de la Colonia">
+            </div>
+        </div>
+    </section>
+
+    <!-- KM 0 EXTRACTION & ARRIVAL -->
+    <section>
+        <div class="container split" style="direction: rtl;">
+            <div style="direction: ltr;">
+                <p class="mono" style="text-transform: uppercase; margin-bottom: 1rem;">// LOGÍSTICA DE BAJA FRICCIÓN</p>
+                <h2 class="section-title">Facturación Kilómetro Cero</h2>
+                <p style="color: var(--gray-dark); margin-bottom: 1.5rem;">
+                    El nuevo aeropuerto de Anta está plenamente operativo para vuelos comerciales desde Lima (50 minutos vía LATAM). La desconexión es absoluta, pero el acceso carece de fricciones logísticas.
+                </p>
+                <p style="color: var(--gray-dark); margin-bottom: 1.5rem;">
+                    <strong>El Cockpit Rodante:</strong> La experiencia arranca en la pista de aterrizaje. Traslados tácticos en sidecars de aluminio remachado equipados con antenas Starlink vehiculares y brazos articulados para laptops. Ejecuta código y atiende mercados en movimiento directo hacia las alturas frente al Huascarán.
+                </p>
+                <p style="color: var(--gray-dark);">
+                    <strong>El Protocolo de Despliegue Inmediato:</strong> Al llegar, el sistema ejecuta tres acciones sin rodeos: Purga térmica en duchas de piedra volcánica bajo el óculo abierto al glaciar, inyección productiva en los cubos de co-working suspendidos del Kero Central, y stasis biológica en la cama de tensegridad sin firma electromagnética.
+                </p>
+            </div>
+            <div class="split-image">
+                <!-- El usuario colocará image_qxuCcD.png para el sidecar en movimiento -->
+                <img src="public/image_qxuCcD.png" alt="GANT Sidecar Táctico Starlink">
+            </div>
+        </div>
+    </section>
+
+    <!-- FINANCIAL INSIGHTS (THE VENTURE MATRICES) -->
+    <section>
+        <div class="container">
+            <p class="mono" style="text-transform: uppercase; margin-bottom: 1rem;">// LIQUID CAPITAL ALIGNMENT</p>
+            <h2 class="section-title">Métricas de Inversión Institucional</h2>
+            <p style="color: var(--gray-dark); max-width: 700px;">
+                La viabilidad territorial de GANT se fundamenta en un modelo paramétrico que elimina por completo el riesgo inmobiliario, redirigiendo el capital puramente al hardware de alta fidelidad.
+            </p>
+            
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Métrica Estratégica</th>
+                            <th>Indicador Táctico</th>
+                            <th>Rationale de Reducción de Riesgo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Ronda de Inversión (Fase II)</strong></td>
+                            <td>$40,000.00 USD</td>
+                            <td>Financiación externa destinada al núcleo tecnológico y 7 estructuras modulares exentas.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CAPEX de Adquisición de Suelo</strong></td>
+                            <td>$0.00 USD</td>
+                            <td>Convenio de Usufructo a 30 años celebrado con la comunidad campesina nativa e inscrito en la SUNARP.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Periodo de Recuperación (Payback)</strong></td>
+                            <td>0.27 Años (3 meses)</td>
+                            <td>Amortización acelerada para inversores externos calculada sobre los flujos netos del Año 3.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Punto de Equilibrio Operativo</strong></td>
+                            <td>14.8% de Ocupación</td>
+                            <td>El umbral operativo mínimo se satisface con solo 18 noches/mes agregadas en todo el complejo.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Utilidad Neta Líquida (Fase III)</strong></td>
+                            <td>$150,024.00 USD / año</td>
+                            <td>Estructura de costos fijos ultrabaja gracias al soporte off-grid y la tercerización en la comunidad.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="financial-note">
+                <p class="mono" style="font-weight: bold; margin-bottom: 0.5rem; text-transform: uppercase; color: #000;">[ RATIONALE PARA FONDOS DE CAPITAL DE RIESGO ]</p>
+                Al recuperar el 100% del capital de riesgo en el primer tercio de su activación comercial, la ronda queda inmunizada ante fluctuaciones macroeconómicas. El excedente generado financia las fases de expansión subsiguientes de manera 100% orgánica mediante reinversión de utilidades, protegiendo la estructura accionaria original y evitando cualquier tipo de dilución.
+            </div>
+        </div>
+    </section>
+
+    <!-- THE RESTRICTED INTERACTIVE SECURITY GATE -->
+    <section style="background-color: #000000; border-bottom: none;">
+        <div class="container">
+            <div class="gate-box">
+                <h3>[ SECURITY GATE: REQUEST MASTER BUSINESS PLAN ]</h3>
+                <p>
+                    Las métricas de la oferta regional hotelera tradicional están muertas. Si posees la velocidad por naturaleza indispensable para evaluar y desplegar fondos en este océano azul corporativo, introduce tus credenciales cifradas para acceder al dossier institucional completo.
+                </p>
+                
+                <form action="#" method="POST" onsubmit="event.preventDefault(); alert('CREDENTIALS SUBMITTED. COGNITIVE INJECTION SEQUENCE INITIATED.');">
+                    <div class="form-group">
+                        <label for="entity">Identificación / Fondo de Inversión / VC Firm</label>
+                        <input type="text" id="entity" placeholder="E.g., OAK VENTURES / ALPHA PLATFORM" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="channel">Canal Seguro de Comunicación Directa (Signal / WhatsApp Cifrado)</label>
+                        <input type="text" id="channel" placeholder="+51 9XX XXX XXX / encrypted-handle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="capital">Capacidad Nominal de Despliegue de Liquidez</label>
+                        <select id="capital" required>
+                            <option value="" disabled selected>Selecciona tu rango operativo</option>
+                            <option value="seed">Fase Inicial / Menor a $5M USD</option>
+                            <option value="mid">Fase de Escala / $5M - $20M USD</option>
+                            <option value="institutional">Fase Institucional / Superior a $20M USD</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-tactic">Ejecutar Despliegue y Extracción de Datos</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>GANT by MARFA NoHotels® // GRANITE ANDEAN NOMAD TRIBE // ALL RIGHTS RESERVED 2026</p>
+        </div>
+    </footer>
+
+</body>
+</html>
